@@ -286,7 +286,7 @@ module RCS
 				keys.each do |key|
 					rev = @revision[key]
 					# the parent commit is rev.next if we're on the
-					# master branch (rev.branch is nil) or
+					# main branch (rev.branch is nil) or
 					# rev.diff_base otherwise
 					from = rev.branch.nil? ? rev.next : rev.diff_base
 					# A commit can only be exported if it has no
@@ -296,7 +296,7 @@ module RCS
 						next
 					end
 
-					branch = rev.branch || 'master'
+					branch = rev.branch || 'main'
 					author = username_to_author(rev.author, opts)
 					date = "#{rev.date.tv_sec} +0000"
 					log = String.new
@@ -742,7 +742,7 @@ module RCS
 		end
 
 		def export(opts={})
-			xbranch = self.branch || 'master'
+			xbranch = self.branch || 'main'
 			xauthor = username_to_author(self.author, opts)
 			xlog = self.log.join
 			numdate = self.date.tv_sec
